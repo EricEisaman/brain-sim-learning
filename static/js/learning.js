@@ -112,7 +112,7 @@ class LearningManager {
         this.trialActive = false;
 
         // Success if OUT-1 > OUT-2 and OUT-1 > threshold
-        const threshold = 0.08;
+        const threshold = 0.02;
         const success = this.out1Value > this.out2Value && this.out1Value > threshold;
 
         this.lastResult = success ? 'success' : 'fail';
