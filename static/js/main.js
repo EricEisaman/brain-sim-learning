@@ -30,6 +30,7 @@ class Simulation {
         const canvas = document.getElementById('brainCanvas');
 
         this.brainRenderer = new BrainRenderer(canvas);
+        this.websocket = new WebSocketClient(this);
         this.network = new Network(this.brainRenderer);
         this.networkRenderer = new NetworkRenderer(this.brainRenderer.ctx, this.network);
         this.dashboard = new Dashboard(this.network);
