@@ -1,0 +1,133 @@
+/**
+ * Component styles - Reusable UI components
+ */
+
+/* Panel base */
+.panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.panel h2 {
+    font-size: var(--font-size-base);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+/* Buttons */
+.control-btn {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    border: 1px solid var(--neon-cyan);
+    background: transparent;
+    color: var(--neon-cyan);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: var(--font-size-base);
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+}
+
+.control-btn.active {
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+}
+
+/* Range slider */
+input[type="range"] {
+    -webkit-appearance: none;
+    background: var(--border-color);
+    height: 4px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+/* Canvas containers */
+.canvas-container {
+    background: var(--bg-dark);
+    border-radius: var(--radius-sm);
+}
+
+/* Info icons with tooltips */
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+    font-weight: bold;
+    background: var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 50%;
+    cursor: help;
+    margin-left: 6px;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+}
+
+.info-icon:hover {
+    background: var(--neon-cyan);
+    color: var(--bg-dark);
+}
+
+/* Stat items with tooltips */
+.stat {
+    cursor: help;
+    transition: background 0.2s ease;
+    padding: 4px;
+    border-radius: var(--radius-sm);
+}
+
+.stat:hover {
+    background: rgba(0, 255, 255, 0.05);
+}
+
+/* Port tooltips */
+.port {
+    cursor: pointer;
+}
+
+.port:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-height: 700px) {
+    .panel {
+        padding: var(--spacing-sm);
+    }
+
+    .panel h2 {
+        font-size: var(--font-size-sm);
+        margin-bottom: 5px;
+    }
+}

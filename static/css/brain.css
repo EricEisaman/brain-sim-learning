@@ -1,0 +1,315 @@
+/**
+ * Brain section styles - Canvas area and I/O ports
+ */
+
+/* Input/Output Ports */
+.input-ports,
+.output-ports {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.input-ports {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.output-ports {
+    left: 20px;
+    bottom: 20%;
+}
+
+/* Port styling */
+.port {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--neon-cyan);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--bg-panel);
+    user-select: none;
+}
+
+.input-port {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+}
+
+.input-port:hover {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+    box-shadow: var(--glow-green);
+}
+
+.output-port {
+    border-color: var(--neon-magenta);
+    color: var(--neon-magenta);
+}
+
+.output-port:hover {
+    background: var(--neon-magenta);
+    color: var(--bg-dark);
+    box-shadow: var(--glow-magenta);
+}
+
+.port.active {
+    animation: port-flash 0.4s ease-out;
+}
+
+.input-port.active {
+    background: var(--neon-green) !important;
+    color: var(--bg-dark) !important;
+    box-shadow: 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+}
+
+.output-port.active {
+    background: var(--neon-magenta) !important;
+    color: var(--bg-dark) !important;
+    box-shadow: 0 0 20px var(--neon-magenta), 0 0 40px var(--neon-magenta);
+}
+
+@keyframes port-flash {
+    0% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    30% {
+        transform: scale(1.2);
+        filter: brightness(1.5);
+    }
+    100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+/* Port connection lines (optional visual enhancement) */
+.port::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(to right, currentColor, transparent);
+}
+
+/* ============================================
+   LEARNING HUD - Large animated progress display
+   ============================================ */
+
+.learning-hud {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 160px;
+    background: rgba(10, 10, 20, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 0 20px rgba(0, 0, 0, 0.5),
+        inset 0 0 30px rgba(0, 255, 255, 0.03);
+}
+
+/* Ring container */
+.hud-rings {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 10px;
+}
+
+.ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+/* Background ring */
+.ring-bg {
+    fill: none;
+    stroke: rgba(0, 255, 255, 0.1);
+    stroke-width: 6;
+}
+
+/* Progress ring */
+.ring-progress {
+    fill: none;
+    stroke: url(#progressGradient);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 339.292;
+    transition: stroke-dashoffset 0.5s ease;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6));
+}
+
+/* Inner decorative ring */
+.ring-inner {
+    fill: none;
+    stroke: rgba(0, 255, 255, 0.15);
+    stroke-width: 2;
+    stroke-dasharray: 8 4;
+    animation: rotate-ring 20s linear infinite;
+}
+
+/* Tick marks */
+.tick-marks line {
+    stroke: rgba(0, 255, 255, 0.4);
+    stroke-width: 2;
+}
+
+@keyframes rotate-ring {
+    from { transform: rotate(0deg); transform-origin: 60px 60px; }
+    to { transform: rotate(360deg); transform-origin: 60px 60px; }
+}
+
+/* Center content */
+.hud-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hud-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #00ff88;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+    font-family: 'Courier New', monospace;
+}
+
+.hud-unit {
+    font-size: 14px;
+    color: rgba(0, 255, 136, 0.7);
+    margin-top: 2px;
+}
+
+/* Label */
+.hud-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: rgba(0, 255, 255, 0.7);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Stats row */
+.hud-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.hud-stat {
+    text-align: center;
+}
+
+.hud-stat-value {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #00ffff;
+    font-family: 'Courier New', monospace;
+}
+
+.hud-stat-label {
+    display: block;
+    font-size: 8px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2px;
+}
+
+.hud-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(0, 255, 255, 0.3);
+}
+
+/* Activity bars */
+.hud-bars {
+    display: flex;
+    gap: 4px;
+    height: 20px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.hud-bar {
+    flex: 1;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hud-bar span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0%;
+    background: linear-gradient(to top, #00ff88, #00ffaa);
+    transition: height 0.15s ease;
+    border-radius: 2px;
+}
+
+.hud-bar.active span {
+    height: 100%;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.6);
+}
+
+/* Pulse animation for success */
+.learning-hud.success {
+    animation: hud-success-pulse 0.5s ease;
+}
+
+@keyframes hud-success-pulse {
+    0% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 255, 136, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(0, 255, 136, 0.4), inset 0 0 40px rgba(0, 255, 136, 0.2); }
+    100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 255, 136, 0.03); }
+}
+
+/* Fail animation */
+.learning-hud.fail {
+    animation: hud-fail-pulse 0.5s ease;
+}
+
+@keyframes hud-fail-pulse {
+    0% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(255, 68, 102, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(255, 68, 102, 0.4), inset 0 0 40px rgba(255, 68, 102, 0.2); }
+    100% { box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.03); }
+}
+
+/* Status colors */
+.hud-stat-value.running {
+    color: #00c8ff;
+    animation: status-blink 1s ease-in-out infinite;
+}
+
+.hud-stat-value.success {
+    color: #00ff88;
+}
+
+.hud-stat-value.fail {
+    color: #ff4466;
+}
+
+@keyframes status-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}

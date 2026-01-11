@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Learning Visualization</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/brain.css">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Brain Visualization -->
+        <div class="brain-section">
+            <canvas id="brainCanvas"></canvas>
+
+            <!-- Large Learning Progress HUD -->
+            <div class="learning-hud">
+                <div class="hud-rings">
+                    <svg class="ring-svg" viewBox="0 0 120 120">
+                        <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#00ff88"/>
+                                <stop offset="100%" style="stop-color:#00ffff"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Outer ring - background -->
+                        <circle class="ring-bg" cx="60" cy="60" r="54" />
+                        <!-- Outer ring - progress -->
+                        <circle class="ring-progress" id="hudRingProgress" cx="60" cy="60" r="54" />
+                        <!-- Inner ring - decorative -->
+                        <circle class="ring-inner" cx="60" cy="60" r="42" />
+                        <!-- Tick marks -->
+                        <g class="tick-marks">
+                            <line x1="60" y1="8" x2="60" y2="14" />
+                            <line x1="60" y1="106" x2="60" y2="112" />
+                            <line x1="8" y1="60" x2="14" y2="60" />
+                            <line x1="106" y1="60" x2="112" y2="60" />
+                        </g>
+                    </svg>
+                    <div class="hud-center">
+                        <div class="hud-value" id="hudValue">0</div>
+                        <div class="hud-unit">%</div>
+                    </div>
+                </div>
+                <div class="hud-label">LEARNING</div>
+                <div class="hud-stats">
+                    <div class="hud-stat">
+                        <span class="hud-stat-value" id="hudTrials">0</span>
+                        <span class="hud-stat-label">TRIALS</span>
+                    </div>
+                    <div class="hud-divider"></div>
+                    <div class="hud-stat">
+                        <span class="hud-stat-value" id="hudStatus">IDLE</span>
+                        <span class="hud-stat-label">STATUS</span>
+                    </div>
+                </div>
+                <div class="hud-bars">
+                    <div class="hud-bar" id="hudBar1"><span></span></div>
+                    <div class="hud-bar" id="hudBar2"><span></span></div>
+                    <div class="hud-bar" id="hudBar3"><span></span></div>
+                    <div class="hud-bar" id="hudBar4"><span></span></div>
+                    <div class="hud-bar" id="hudBar5"><span></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <h1 class="title">NEURAL LEARNING</h1>
+
+            <!-- Controls -->
+            <div class="panel controls-panel">
+                <div class="control-row">
+                    <button id="playBtn" class="control-btn primary">Play</button>
+                    <button id="pauseBtn" class="control-btn">Pause</button>
+                    <button id="resetBtn" class="control-btn danger">Reset</button>
+                </div>
+                <div class="speed-row">
+                    <label>Speed</label>
+                    <input type="range" id="speedSlider" min="0.2" max="3" step="0.1" value="1">
+                    <span id="speedValue">1.0x</span>
+                </div>
+            </div>
+
+            <!-- Live Trial Status -->
+            <div class="panel trial-panel">
+                <div class="trial-header">
+                    <span class="trial-label">Trial #<span id="trialNum">0</span></span>
+                    <span id="trialStatus" class="trial-status waiting">Waiting</span>
+                </div>
+                <div class="trial-io">
+                    <div class="io-box input-box">
+                        <div class="io-label">INPUT</div>
+                        <div class="io-pattern" id="inputPattern">
+                            <span class="io-bit off">1</span>
+                            <span class="io-bit off">2</span>
+                            <span class="io-bit off">3</span>
+                        </div>
+                    </div>
+                    <div class="io-arrow">→</div>
+                    <div class="io-box output-box">
+                        <div class="io-label">OUTPUT</div>
+                        <div class="io-values">
+                            <div class="output-bar">
+                                <div class="bar-fill" id="out1Bar" style="height: 0%"></div>
+                                <span class="bar-label">1</span>
+                            </div>
+                            <div class="output-bar">
+                                <div class="bar-fill secondary" id="out2Bar" style="height: 0%"></div>
+                                <span class="bar-label">2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Rate Plot - Main Learning Indicator -->
+            <div class="panel plot-panel">
+                <h2>Learning Curve</h2>
+                <canvas id="successPlot"></canvas>
+                <div class="plot-stats">
+                    <span>Success: <strong id="successPct">0%</strong></span>
+                    <span>Trials: <strong id="totalTrials">0</strong></span>
+                </div>
+            </div>
+
+            <!-- Learning Activity Plot -->
+            <div class="panel plot-panel">
+                <h2>Learning Activity</h2>
+                <canvas id="weightsPlot"></canvas>
+                <div class="plot-stats">
+                    <span>Strengthened: <strong id="strengthenedCount">0</strong></span>
+                    <span>Weakened: <strong id="weakenedCount">0</strong></span>
+                </div>
+            </div>
+
+            <!-- Region Activity - Shows Network Dynamics -->
+            <div class="panel activity-panel">
+                <h2>Region Activity</h2>
+                <div class="region-bars" id="regionBars">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- How This Works -->
+            <div class="panel info-panel">
+                <h2>How This Works</h2>
+                <p class="info-brief">
+                    The network learns to associate input patterns with outputs using
+                    <strong>reward-modulated plasticity</strong> with <strong>lateral inhibition</strong>
+                    and <strong>Oja's rule</strong> as a regularizer.
+                </p>
+                <a href="/static/about.html" class="info-link" target="_blank">Learn more →</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/brain.js"></script>
+    <script src="/static/js/network.js"></script>
+    <script src="/static/js/learning.js"></script>
+    <script src="/static/js/renderer.js"></script>
+    <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

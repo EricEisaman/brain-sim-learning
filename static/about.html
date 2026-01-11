@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Neural Learning Works</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-panel: #12121a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #888;
+            --neon-cyan: #00ffff;
+            --neon-green: #00ff88;
+            --neon-magenta: #ff00ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--neon-cyan);
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            background: var(--bg-panel);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid #1a1a2a;
+        }
+
+        h2 {
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        code {
+            background: rgba(0, 255, 255, 0.1);
+            color: var(--neon-cyan);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .formula {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: var(--neon-cyan);
+            margin: 16px 0;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .highlight {
+            color: var(--neon-green);
+            font-weight: 500;
+        }
+
+        ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .legend {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.green {
+            background: #00ff88;
+            box-shadow: 0 0 8px #00ff88;
+        }
+
+        .dot.red {
+            background: #ff4466;
+            box-shadow: 0 0 8px #ff4466;
+        }
+
+        .dot.cyan {
+            background: #00ffff;
+            box-shadow: 0 0 8px #00ffff;
+        }
+
+        .diagram {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 16px 0;
+            text-align: center;
+            font-family: monospace;
+            color: var(--text-secondary);
+        }
+
+        .diagram .arrow {
+            color: var(--neon-cyan);
+        }
+
+        .diagram .input {
+            color: var(--neon-green);
+        }
+
+        .diagram .output {
+            color: var(--neon-magenta);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Simulation</a>
+
+        <h1>HOW NEURAL LEARNING WORKS</h1>
+        <p class="subtitle">Understanding the brain network simulation</p>
+
+        <section>
+            <h2>The Learning Task</h2>
+            <p>
+                The network is trained on a simple <span class="highlight">pattern association</span> task:
+                when <strong>Input 1</strong> and <strong>Input 2</strong> fire together,
+                <strong>Output 1</strong> should activate more than Output 2.
+            </p>
+            <div class="diagram">
+                <span class="input">[IN-1 + IN-2]</span>
+                <span class="arrow">→→→</span>
+                <span class="output">OUT-1</span>
+            </div>
+            <p>
+                Every ~1 second, the network receives the input pattern and we measure
+                which output responds more strongly. Over time, the network should learn
+                to produce the correct output.
+            </p>
+        </section>
+
+        <section>
+            <h2>Hebbian Learning</h2>
+            <p>
+                The network uses <span class="highlight">Hebbian learning</span>, based on the principle:
+            </p>
+            <p style="text-align: center; font-style: italic; color: var(--neon-cyan);">
+                "Neurons that fire together, wire together."
+            </p>
+            <p>
+                When two connected neurons are both active at the same time, the connection
+                (synapse) between them gets stronger. This is how the brain forms associations
+                and memories.
+            </p>
+            <p>
+                In our simulation, when input signals flow through the network and cause
+                certain pathways to activate together, those pathways become stronger,
+                making the same response more likely in the future.
+            </p>
+        </section>
+
+        <section>
+            <h2>Oja's Rule</h2>
+            <p>
+                Pure Hebbian learning has a problem: weights can grow without bound,
+                leading to unstable networks. <span class="highlight">Oja's rule</span>
+                solves this by adding a normalization term:
+            </p>
+            <div class="formula">
+                Δw = η · y · (x - y · w)
+            </div>
+            <p>Where:</p>
+            <ul>
+                <li><code>Δw</code> = change in connection weight</li>
+                <li><code>η</code> = learning rate (how fast to learn)</li>
+                <li><code>x</code> = presynaptic activity (input neuron)</li>
+                <li><code>y</code> = postsynaptic activity (output neuron)</li>
+                <li><code>w</code> = current weight</li>
+            </ul>
+            <p>
+                The <code>(x - y·w)</code> term naturally limits weight growth. As
+                weights get larger, the <code>y·w</code> term increases, reducing
+                the update. This keeps the network stable while still learning.
+            </p>
+        </section>
+
+        <section>
+            <h2>What You See</h2>
+            <p>The visualization shows learning in action:</p>
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="dot green"></span>
+                    <span>Strengthened connections</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot red"></span>
+                    <span>Weakened connections</span>
+                </div>
+                <div class="legend-item">
+                    <span class="dot cyan"></span>
+                    <span>Active signals</span>
+                </div>
+            </div>
+            <p style="margin-top: 16px;">
+                <strong>Learning Curve:</strong> Shows the success rate over time.
+                If learning is working, this should trend upward from ~50% (random)
+                toward higher values.
+            </p>
+            <p>
+                <strong>Connection Weights:</strong> Shows how much connection weights
+                have changed from their initial values. Higher values mean more learning
+                has occurred.
+            </p>
+            <p>
+                <strong>Region Activity:</strong> Shows which brain regions are currently
+                active. Different regions handle different functions (sensory input,
+                motor output, memory, etc.).
+            </p>
+        </section>
+
+        <section>
+            <h2>The Brain Regions</h2>
+            <p>The simulation models six brain regions plus a central hub:</p>
+            <ul>
+                <li><strong>Sensory:</strong> Receives input signals</li>
+                <li><strong>Motor:</strong> Produces Output 1</li>
+                <li><strong>Prefrontal:</strong> Executive control and decision-making</li>
+                <li><strong>Memory:</strong> Pattern storage and recall</li>
+                <li><strong>Limbic:</strong> Emotional processing</li>
+                <li><strong>Visual:</strong> Visual processing</li>
+                <li><strong>Hub:</strong> Central integration area (produces Output 2)</li>
+            </ul>
+            <p>
+                Signals flow between regions through weighted connections. As learning
+                progresses, the pathways from sensory input to motor output strengthen,
+                while other pathways may weaken.
+            </p>
+        </section>
+
+        <section>
+            <h2>Why This Matters</h2>
+            <p>
+                This simple demonstration shows the fundamental mechanism behind how
+                biological neural networks learn. The same principles—strengthening
+                connections between co-active neurons—underlie learning in real brains,
+                from simple reflex conditioning to complex skill acquisition.
+            </p>
+            <p>
+                Modern artificial neural networks use variations of these ideas, though
+                they typically use <span class="highlight">backpropagation</span> instead
+                of Hebbian learning for more efficient training on complex tasks.
+            </p>
+        </section>
+
+        <a href="/" class="back-link">← Back to Simulation</a>
+    </div>
+</body>
+</html>

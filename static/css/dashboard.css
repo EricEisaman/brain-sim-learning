@@ -1,0 +1,344 @@
+/**
+ * Dashboard styles - Beautiful learning visualization
+ */
+
+/* Controls */
+.controls-panel {
+    padding: 8px !important;
+}
+
+.control-row {
+    display: flex;
+    gap: 8px;
+}
+
+.control-row .control-btn {
+    flex: 1;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.control-btn.primary {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    border-color: #00ff88;
+    color: #0a0a0f;
+    font-weight: 600;
+}
+
+.control-btn.primary:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.control-btn.danger {
+    border-color: #ff4466;
+    color: #ff4466;
+}
+
+.control-btn.danger:hover {
+    background: #ff4466;
+    color: #0a0a0f;
+}
+
+/* Speed slider */
+.speed-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.speed-row label {
+    color: var(--text-secondary);
+}
+
+.speed-row input[type="range"] {
+    flex: 1;
+}
+
+.speed-row span {
+    color: var(--neon-cyan);
+    min-width: 35px;
+    text-align: right;
+}
+
+/* Trial Panel */
+.trial-panel {
+    padding: 12px !important;
+}
+
+.trial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.trial-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.trial-label span {
+    color: var(--neon-cyan);
+    font-weight: 600;
+}
+
+.trial-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.trial-status.waiting {
+    background: rgba(100, 100, 120, 0.3);
+    color: #888;
+}
+
+.trial-status.running {
+    background: rgba(0, 200, 255, 0.2);
+    color: #00c8ff;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.trial-status.success {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+}
+
+.trial-status.fail {
+    background: rgba(255, 68, 102, 0.2);
+    color: #ff4466;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* Input/Output Display */
+.trial-io {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.io-box {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.io-label {
+    font-size: 10px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.io-arrow {
+    color: var(--text-secondary);
+    font-size: 20px;
+}
+
+/* Input Pattern Bits */
+.io-pattern {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.io-bit {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.io-bit.off {
+    background: rgba(60, 60, 80, 0.5);
+    color: #555;
+    border: 1px solid #333;
+}
+
+.io-bit.on {
+    background: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+    color: #0a0a0f;
+    border: 1px solid #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+/* Output Bars */
+.io-values {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    height: 50px;
+}
+
+.output-bar {
+    width: 32px;
+    background: rgba(60, 60, 80, 0.3);
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.bar-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, #00ff88 0%, #00ffaa 100%);
+    transition: height 0.15s ease;
+    border-radius: 0 0 4px 4px;
+}
+
+.bar-fill.secondary {
+    background: linear-gradient(to top, #ff00ff 0%, #ff44aa 100%);
+}
+
+.bar-fill.winner {
+    box-shadow: 0 0 10px currentColor;
+}
+
+.bar-label {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+}
+
+/* Plot Panels */
+.plot-panel {
+    padding: 10px !important;
+}
+
+.plot-panel h2 {
+    margin-bottom: 8px;
+}
+
+.plot-panel canvas {
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+}
+
+.plot-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+.plot-stats strong {
+    color: var(--neon-cyan);
+}
+
+/* Region Activity Panel */
+.activity-panel {
+    padding: 10px !important;
+}
+
+.activity-panel h2 {
+    margin-bottom: 8px;
+}
+
+.region-bars {
+    display: flex;
+    gap: 4px;
+    height: 40px;
+}
+
+.region-bar {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.region-bar-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: height 0.1s ease;
+    border-radius: 0 0 4px 4px;
+}
+
+.region-bar-label {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+}
+
+/* Info Panel */
+.info-panel {
+    padding: 10px !important;
+}
+
+.info-brief {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.info-brief strong {
+    color: var(--neon-cyan);
+}
+
+.info-link {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--neon-green);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.info-link:hover {
+    color: #00ffaa;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-height: 700px) {
+    .plot-panel canvas {
+        height: 60px;
+    }
+
+    .region-bars {
+        height: 30px;
+    }
+
+    .io-bit {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+
+    .io-values {
+        height: 40px;
+    }
+}
